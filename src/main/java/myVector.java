@@ -2,22 +2,22 @@
 
 public class myVector<E> {
 
-    private Object[] elementData;
-    private int elementCount;
-    private int maxCapacity;
+    private Object[] element;
+    private int Count;
+    private int lenght;
 
 
 
     public myVector() {
-        elementData = new Object[10];
-        this.maxCapacity=10;
+        element = new Object[10];
+        this.lenght =10;
     }
     public myVector(myVector<E> e){
-        this.maxCapacity=e.capacity();
-        this.elementCount=e.elements();
-        elementData= new Object[maxCapacity];
+        this.lenght =e.capacity();
+        this.Count =e.elements();
+        element = new Object[lenght];
 
-        System.arraycopy(e.getElementData(), 0,this.elementData, 0, maxCapacity );
+        System.arraycopy(e.getElement(), 0,this.element, 0, lenght);
     }
 
     private Object[] enlargementVector() {
@@ -26,13 +26,13 @@ public class myVector<E> {
 
     private Object[] enlargementVector(int size) {
         if(size==0){
-            maxCapacity=(maxCapacity*2)+10;
+            lenght =(lenght *2)+10;
         }
         else {
-            maxCapacity=size;
+            lenght =size;
         }
-        Object[] newVector= new Object[maxCapacity];
-        System.arraycopy(elementData,0,newVector, 0,elementCount);
+        Object[] newVector= new Object[lenght];
+        System.arraycopy(element,0,newVector, 0, Count);
         return newVector;
 
     }
@@ -41,74 +41,74 @@ public class myVector<E> {
 
     public boolean add(E e)
     {
-        if(elementCount+1==maxCapacity)
-            elementData=enlargementVector();
-        elementData[elementCount++]=e;
+        if(Count +1== lenght)
+            element =enlargementVector();
+        element[Count++]=e;
         return true;
     }
     public boolean add(int index, E e)
     {
-        if(index<0||index>maxCapacity) {
+        if(index<0||index> lenght) {
             throw new IndexOutOfBoundsException();
             //return false;
         }
-        if(elementCount+1==maxCapacity)
-            elementData=enlargementVector();
-        System.arraycopy(elementData, index, elementData, index+1, elementCount-index);
-        elementData[index]=e;
-        elementCount++;
+        if(Count +1== lenght)
+            element =enlargementVector();
+        System.arraycopy(element, index, element, index+1, Count -index);
+        element[index]=e;
+        Count++;
         return true;
     }
 
     public boolean remove() {
-        if(elementCount-1==-1) {
+        if(Count -1==-1) {
             throw new IndexOutOfBoundsException();
             //return false;
         }
-        elementData[elementCount]=null;
-        elementCount--;
+        element[Count]=null;
+        Count--;
         return true;
     }
 
     public boolean removeElementAt(int index) {
-        if(index>=elementCount||index<0||(elementCount-1==-1)) {
+        if(index>= Count ||index<0||(Count -1==-1)) {
            throw  new IndexOutOfBoundsException();
             //return false;
         }
-        int j = elementCount - index - 1;
+        int j = Count - index - 1;
 
         if (j > 0) {
-            System.arraycopy(elementData, index + 1, elementData, index, j);
+            System.arraycopy(element, index + 1, element, index, j);
         }
-        elementCount--;
-        elementData[elementCount] = null;
+        Count--;
+        element[Count] = null;
     return true;
     }
 
 
     public boolean removeAll(){
-        if(elementCount==0) {
+        if(Count ==0) {
            throw  new IllegalArgumentException();
             //return false;
         }
-        for(int i=0; i<elementCount;i++) {
-            elementData[i] = null;
+        for(int i = 0; i< Count; i++) {
+            element[i] = null;
         }
-        elementCount=0;
+        Count =0;
         return true;
     }
 
     public String toString() {
         String result= ("");
-        for(int i =0; i<elementCount; i++) {
-            result+=elementData[i].toString();
+        for(int i = 0; i< Count; i++) {
+            result+= element[i].toString();
         }
         return result;
     }
 
 
     public boolean setSize(int size) {
-        if(size<maxCapacity) {
+        if(size< lenght) {
             throw new IllegalArgumentException();
            // return false;
         }//check
@@ -117,15 +117,15 @@ public class myVector<E> {
     }
 
     public int elements() {
-        return elementCount;
+        return Count;
     }
 
     public int capacity() {
-        return maxCapacity;
+        return lenght;
     }
 
-    public Object[] getElementData() {
-        return elementData;
+    public Object[] getElement() {
+        return element;
     }
 }
 

@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -78,12 +77,17 @@ class myVectorTest {
         });
 
     }
-    @ParameterizedTest
-    @ValueSource(ints = { 567, -455, 0})
-    void removeElementAt_removeEmptyVectorAndWrongIndex_IndexException(int index) {
+    @Test
+    void removeElementAt_removeEmptyVectorAndWrongIndex_IndexException() {
         myVector myVector = new myVector();
         assertThrows(IndexOutOfBoundsException.class, ()-> {
-            myVector.removeElementAt(index);
+            myVector.removeElementAt(567);
+        });
+        assertThrows(IndexOutOfBoundsException.class, ()-> {
+            myVector.removeElementAt(-455);
+        });
+        assertThrows(IndexOutOfBoundsException.class, ()-> {
+            myVector.removeElementAt(0);
         });
     }
 
@@ -102,12 +106,14 @@ class myVectorTest {
             myVector.setSize(3);
         });
     }
-    @ParameterizedTest
-    @CsvSource({"-1, 456", "544, 456"})
-    void add_WrongIndex_IndexException(int indexOne, int indexTwo) {
+    @Test
+    void add_WrongIndex_IndexException() {
         myVector myVector = new myVector();
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            myVector.add(indexOne, indexTwo);
+            myVector.add(-1, 456);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            myVector.add(544, 456);
         });
     }
     @Test
