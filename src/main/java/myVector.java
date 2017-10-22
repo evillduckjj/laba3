@@ -1,4 +1,4 @@
-package com.company;
+
 
 public class myVector<E> {
 
@@ -11,6 +11,13 @@ public class myVector<E> {
     public myVector() {
         elementData = new Object[10];
         this.maxCapacity=10;
+    }
+    public myVector(myVector<E> e){
+        this.maxCapacity=e.capacity();
+        this.elementCount=e.elements();
+        elementData= new Object[maxCapacity];
+
+        System.arraycopy(e.getElementData(), 0,this.elementData, 0, maxCapacity );
     }
 
     private Object[] enlargementVector() {
@@ -115,6 +122,10 @@ public class myVector<E> {
 
     public int capacity() {
         return maxCapacity;
+    }
+
+    public Object[] getElementData() {
+        return elementData;
     }
 }
 

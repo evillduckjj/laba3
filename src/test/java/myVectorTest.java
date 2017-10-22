@@ -1,7 +1,7 @@
-package com.company;
-
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class myVectorTest {
     public String result = ("ddddfddd156577");
@@ -113,6 +113,15 @@ class myVectorTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
         myVector.add(544, 456);
         });
+    }
+    @Test
+    void myVector_Copy_True() {
+
+        myVector myVector = myVectorFabric();
+        myVector newVector = new myVector(myVector);
+        assertEquals(newVector.capacity(), 10);
+        assertEquals(newVector.elements(), 4);
+        assertEquals(newVector.toString(), result);
     }
 
 
